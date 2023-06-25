@@ -15,6 +15,6 @@
       "Write the below line to get the console to print out 'Hello, World!'.",
       "$print(\"hello, world!\")"
     ],
-    "example": "print('hello, world!')"
+    "example": "print('hello, bella!')"
   }
 ]

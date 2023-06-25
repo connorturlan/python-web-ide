@@ -40,7 +40,7 @@ function App() {
     }
 
     setPage(tutorials[pageIndex]);
-    setCode(page.example);
+    setCode(tutorials[pageIndex].example);
   }, [pageIndex]);
 
   return (
