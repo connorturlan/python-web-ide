@@ -1,0 +1,57 @@
+.ide {
+  display: grid;
+  grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+
+  width: 100%;
+  height: 100%;
+
+  & * {
+    margin: 0;
+  }
+
+  & > * {
+    padding: 24px;
+  }
+
+  &_tutorial {
+    & * {
+      margin-bottom: 12px;
+    }
+  }
+
+  &_control {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  &_code {
+    grid-row: 1 / span 2;
+
+    & > * {
+      height: 100%;
+    }
+  }
+
+  &_console {
+    display: grid;
+    grid-template: 24px 1fr / 100%;
+    gap: 12px;
+
+    overflow-y: auto;
+  }
+
+  &_output {
+  }
+
+  &_error {
+    color: rgb(216, 34, 34);
+  }
+}
+
+pre {
+  padding: 12px;
+  font-size: 12;
+  background-color: #111;
+  font-family: "ui-monospace" "SFMono-Regular" "SF Mono" Consolas Liberation
+    Mono Menlo monospace;
+}

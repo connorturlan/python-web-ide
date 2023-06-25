@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Hello, World!",
+    "content": [
+      "This is the tutorial text for a simple hello, world program.",
+      "Write the below line to get the console to print out 'Hello, World!'.",
+      "$print(\"hello, world!\")"
+    ],
+    "example": "print('hello, world!')"
+  },
+  {
+    "title": "Hello, World! 2",
+    "content": [
+      "This is the tutorial text for a simple hello, world program.",
+      "Write the below line to get the console to print out 'Hello, World!'.",
+      "$print(\"hello, world!\")"
+    ],
+    "example": "print('hello, world!')"
+  }
+]
