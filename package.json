@@ -1,9 +1,9 @@
 {
   "name": "python-web-ide",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "version": "0.1.0",
   "homepage": "https://connorturlan.github.io/python-web-ide",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build --base=./",
