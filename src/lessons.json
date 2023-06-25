@@ -9,12 +9,27 @@
     "example": "print('hello, world!')"
   },
   {
-    "title": "Hello, World! 2",
+    "title": "Assignment",
     "content": [
-      "This is the tutorial text for a simple hello, world program.",
-      "Write the below line to get the console to print out 'Hello, World!'.",
-      "$print(\"hello, world!\")"
+      "By using a single '=' you can assign a value to a label called a Variable.",
+      "This allows you to use names in your code to reference values later in your program!",
+      "You can assign values to labels by using:",
+      "$apple = 0",
+      "$banana = 'fruit'",
+      "$cucumber = 100.0",
+      "Change the values on the left to be 1, 2, and 3 in order."
     ],
-    "example": "print('hello, bella!')"
+    "example": "a = 0\nb = 2\nc = 8\n\n\nprint(a, b, c)\n"
+  },
+  {
+    "title": "Selection",
+    "content": [
+      "You can assign values to labels by using:",
+      "$apple = 0",
+      "$banana = 'fruit'",
+      "$cucumber = 100.0",
+      "Change the values on the left to be 1, 2, and 3 in order."
+    ],
+    "example": "a = 10\n\n\nif a == 5:\n  print('congrats!')\nelse: print('bad luck :(')\n"
   }
 ]
