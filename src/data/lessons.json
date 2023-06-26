@@ -31,5 +31,10 @@
       "Change the values on the left to be 1, 2, and 3 in order."
     ],
     "example": "a = 10\n\n\nif a == 5:\n  print('congrats!')\nelse: print('bad luck :(')\n"
+  },
+  {
+    "title": "Text Generation",
+    "content": ["Hit run! You can trust me. ;)"],
+    "example": "from src.main import generate_text_from_file\ngenerate_text_from_file('./thelorax.txt')"
   }
 ]

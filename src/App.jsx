@@ -2,13 +2,14 @@ import CodeEditor from "@uiw/react-textarea-code-editor";
 import { useEffect, useState } from "react";
 import styles from "./App.module.scss";
 import { usePython } from "react-py";
-import tutorials from "./lessons.json";
+import tutorials from "./data/lessons.json";
 import { BuildTutorial } from "./utils/tutorial.jsx";
+import { loadPyFiles, loadTextFiles } from "./utils/filesystem";
 
 function App() {
   const [code, setCode] = useState(``);
   const [ready, setReady] = useState(false);
-  let [pageIndex, setIndex] = useState(0);
+  const [pageIndex, setIndex] = useState(0);
   const [page, setPage] = useState(tutorials[pageIndex]);
 
   const {
@@ -18,15 +19,30 @@ function App() {
     isLoading,
     isRunning,
     interruptExecution,
+    writeFile,
+    mkdir,
   } = usePython();
 
   const runCode = () => {
     runPython(code);
   };
 
+  const loadFile = () => {
+    console.log("pushing file to file system.");
+
+    mkdir("src");
+    loadTextFiles(writeFile);
+    loadPyFiles(writeFile);
+  };
+
   // enable the button.
   useEffect(() => {
     setReady(!isLoading && !isRunning);
+
+    // load the
+    if (!isLoading) {
+      loadFile();
+    }
   }, [isLoading]);
 
   // update the page.
@@ -52,6 +68,7 @@ function App() {
           placeholder="Please enter Python code."
           onChange={(e) => setCode(e.target.value)}
           padding={15}
+          autoComplete={true}
           style={{
             fontSize: 12,
             backgroundColor: "#111",
@@ -84,9 +101,14 @@ function App() {
       </div>
 
       <div className={styles.ide_console}>
-        <button id="ide-run" onClick={() => runCode(code)} disabled={!ready}>
-          {ready ? "run" : "loading..."}
-        </button>
+        <div className="ide_control">
+          <button id="ide-run" onClick={() => runCode(code)} disabled={!ready}>
+            {ready ? "run" : "loading..."}
+          </button>
+          <button onClick={() => loadFile()} disabled={!ready}>
+            load
+          </button>
+        </div>
 
         {/* stderr console. */}
         {stderr && (
