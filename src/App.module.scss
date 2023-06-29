@@ -1,9 +1,13 @@
+@use "./styles/animation";
+
 .ide {
   display: grid;
   grid-template: repeat(2, 1fr) / repeat(2, 1fr);
 
   width: 100%;
   height: 100%;
+
+  animation: fadeIn 2s;
 
   & * {
     margin: 0;
@@ -19,9 +23,23 @@
     }
   }
 
+  &_loading {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   &_control {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  &_console_control {
+    display: flex;
+    gap: 16px;
   }
 
   &_code {
@@ -35,13 +53,20 @@
 
   &_console {
     display: grid;
-    grid-template: 24px 1fr / 100%;
+    grid-template: 32px 1fr / 100%;
     gap: 12px;
 
     overflow-y: auto;
   }
 
   &_output {
+  }
+
+  &_button {
+    width: 32px;
+    height: 32px;
+
+    font-size: 18px;
   }
 
   &_error {
@@ -62,4 +87,8 @@ pre {
   white-space: -pre-wrap;
   white-space: -o-pre-wrap;
   word-wrap: break-word;
+}
+
+.ide-line--odd {
+  background-color: #222;
 }

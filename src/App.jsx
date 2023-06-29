@@ -6,6 +6,15 @@ import tutorials from "./data/lessons.json";
 import { BuildTutorial } from "./utils/tutorial.jsx";
 import { loadPyFiles, loadTextFiles } from "./utils/filesystem";
 
+const highlightLine = (node, index, line) => {
+  if (node.properties?.className?.includes("code-line")) {
+    if (index % 2 === 0) {
+      node.properties.className.push("ide-line--odd");
+      console.log("~~~", index, node.properties?.className);
+    }
+  }
+};
+
 function App() {
   const [code, setCode] = useState(``);
   const [ready, setReady] = useState(false);
@@ -59,7 +68,13 @@ function App() {
     setCode(tutorials[pageIndex].example);
   }, [pageIndex]);
 
-  return (
+  return false ? (
+    <div className={styles.ide_loading}>
+      <div className={styles["lds-heart"]}>
+        <div></div>
+      </div>
+    </div>
+  ) : (
     <div className={styles.ide}>
       <div className={styles.ide_code}>
         <CodeEditor
@@ -68,7 +83,7 @@ function App() {
           placeholder="Please enter Python code."
           onChange={(e) => setCode(e.target.value)}
           padding={15}
-          autoComplete={true}
+          autoComplete="yes"
           style={{
             fontSize: 12,
             backgroundColor: "#111",
@@ -101,12 +116,22 @@ function App() {
       </div>
 
       <div className={styles.ide_console}>
-        <div className="ide_control">
-          <button id="ide-run" onClick={() => runCode(code)} disabled={!ready}>
-            {ready ? "run" : "loading..."}
+        <div className={styles.ide_console_control}>
+          <button
+            id="ide-run"
+            className={styles.ide_button}
+            onClick={() => runCode(code)}
+            disabled={!ready}
+          >
+            ►
           </button>
-          <button onClick={() => loadFile()} disabled={!ready}>
-            load
+          <button
+            id="ide-test"
+            className={styles.ide_button}
+            onClick={() => runCode(code)}
+            disabled={!ready}
+          >
+            ►|
           </button>
         </div>
 
