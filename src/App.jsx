@@ -68,7 +68,7 @@ function App() {
     setCode(tutorials[pageIndex].example);
   }, [pageIndex]);
 
-  return false ? (
+  return isLoading ? (
     <div className={styles.ide_loading}>
       <div className={styles["lds-heart"]}>
         <div></div>
