@@ -1,7 +1,10 @@
-export const loadFile = async (hook, filename) => {
+export const readFile = async (filename) => {
   const req = await fetch(filename);
-  const data = await req.text();
-  hook(filename, data, { encoding: "utf-8" });
+  return await req.text();
+};
+
+export const loadFile = async (hook, filename) => {
+  return hook(filename, await readFile(filename), { encoding: "utf-8" });
 };
 
 export const loadFiles = (hook, filenames) => {

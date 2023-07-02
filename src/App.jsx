@@ -1,18 +1,23 @@
 import CodeEditor from "@uiw/react-textarea-code-editor";
 import { useEffect, useState } from "react";
 import styles from "./App.module.scss";
+import "./styles/palette.scss";
 import { usePython } from "react-py";
-import tutorials from "./data/lessons.json";
-import { BuildTutorial } from "./utils/tutorial.jsx";
-import { loadPyFiles, loadTextFiles } from "./utils/filesystem";
+import { TutorialPanel } from "./utils/tutorial.jsx";
+import { loadPyFiles, loadTextFiles, readFile } from "./utils/filesystem";
+import { parse } from "yaml";
 
-const highlightLine = (node, index, line) => {
-  if (node.properties?.className?.includes("code-line")) {
-    if (index % 2 === 0) {
-      node.properties.className.push("ide-line--odd");
-      console.log("~~~", index, node.properties?.className);
-    }
-  }
+var tutorials = [];
+
+const loadTutorial = async (setCode) => {
+  const rawFile = await readFile("./lessons.yaml");
+  tutorials = parse(rawFile);
+  console.log(tutorials[0]);
+  const page = TutorialPanel({
+    tutorialObject: tutorials[0],
+    setCode,
+  });
+  console.log(page);
 };
 
 function App() {
@@ -36,7 +41,11 @@ function App() {
     runPython(code);
   };
 
-  const loadFile = () => {
+  const haltCode = () => {
+    interruptExecution();
+  };
+
+  const loadModules = () => {
     console.log("pushing file to file system.");
 
     mkdir("src");
@@ -44,13 +53,16 @@ function App() {
     loadPyFiles(writeFile);
   };
 
+  // on page load.
+  useEffect(() => {
+    loadTutorial(setCode);
+  }, []);
+
   // enable the button.
   useEffect(() => {
-    setReady(!isLoading && !isRunning);
-
-    // load the
+    // load the module files.
     if (!isLoading) {
-      loadFile();
+      loadModules();
     }
   }, [isLoading]);
 
@@ -85,8 +97,9 @@ function App() {
           padding={15}
           autoComplete="yes"
           style={{
-            fontSize: 12,
-            backgroundColor: "#111",
+            "--color-prettylights-syntax-string": "#98c379",
+            fontSize: 14,
+            backgroundColor: "#282c34",
             fontFamily:
               "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
           }}
@@ -96,23 +109,25 @@ function App() {
       <div className={styles.ide_tutorial}>
         <div className={styles.ide_control}>
           <button
+            className={styles.ide_button}
             onClick={() => {
               setIndex(pageIndex - 1);
             }}
             disabled={pageIndex <= 0}
           >
-            ←
+            ⏮
           </button>
           <button
+            className={styles.ide_button + " " + styles.ide_button__right}
             onClick={() => {
               setIndex(pageIndex + 1);
             }}
             disabled={pageIndex >= tutorials.length - 1}
           >
-            →
+            ⏭
           </button>
         </div>
-        <BuildTutorial o={page} setCode={setCode} />
+        <TutorialPanel tutorialObject={page} />
       </div>
 
       <div className={styles.ide_console}>
@@ -121,17 +136,17 @@ function App() {
             id="ide-run"
             className={styles.ide_button}
             onClick={() => runCode(code)}
-            disabled={!ready}
+            disabled={isLoading}
           >
-            ►
+            ⏵
           </button>
           <button
             id="ide-test"
             className={styles.ide_button}
-            onClick={() => runCode(code)}
-            disabled={!ready}
+            onClick={haltCode}
+            disabled={isLoading}
           >
-            ►|
+            ⏸
           </button>
         </div>
 

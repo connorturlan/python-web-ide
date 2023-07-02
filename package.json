@@ -20,7 +20,8 @@
     "rehype-prism": "^2.2.2",
     "rehype-prism-plus": "^1.6.1",
     "rehype-rewrite": "^3.0.6",
-    "sass": "^1.63.6"
+    "sass": "^1.63.6",
+    "yaml": "^2.3.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
