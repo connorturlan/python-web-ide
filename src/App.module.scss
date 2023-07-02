@@ -27,7 +27,8 @@
   }
 
   &_tutorial {
-    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
     
     & * {
       margin-bottom: 12px;
