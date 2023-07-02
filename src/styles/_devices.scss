@@ -1,0 +1,26 @@
+$xs: 576px;
+$sm: 800px;
+$md: 992px;
+$lg: 1200px;
+$xxl: 1400px;
+
+$phone-max: 600px;
+$tablet-max: 900px;
+
+@mixin phone {
+  @media only screen and (max-width: $phone-max) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media only screen and (min-width: ($phone-max + 1)) and (max-width: $tablet-max) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (min-width: ($tablet-max + 1)) {
+    @content;
+  }
+}
