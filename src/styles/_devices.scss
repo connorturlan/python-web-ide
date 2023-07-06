@@ -13,14 +13,8 @@ $tablet-max: 900px;
   }
 }
 
-@mixin tablet {
-  @media only screen and (min-width: ($phone-max + 1)) and (max-width: $tablet-max) {
-    @content;
-  }
-}
-
-@mixin desktop {
-  @media only screen and (min-width: ($tablet-max + 1)) {
+@mixin default {
+  @media only screen and (min-width: ($phone-max + 1)) {
     @content;
   }
 }

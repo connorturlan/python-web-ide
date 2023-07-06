@@ -1,3 +1,5 @@
+import styles from "./TutorialPanel.module.scss";
+
 export const TutorialPanel = ({ tutorialObject }) => {
   if (!tutorialObject) return;
 

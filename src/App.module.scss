@@ -1,137 +1,11 @@
 @use "./styles/animation";
 @use "./styles/devices";
-
-.ide {
-  display: grid;
-  grid-template: repeat(2, 1fr) / repeat(2, 1fr);
-
-  @include devices.phone {
-    display: flex;
-  }
-
-  width: 100%;
-  height: 100%;
-
-  animation: fadeIn 2s;
-  @include devices.phone {
-    animation: none;
-  }
-  background-color: #15151a;
-
-  & * {
-    margin: 0;
-  }
-
-  & > * {
-    padding: 24px;
-  }
-
-  &_tutorial {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    
-    & * {
-      margin-bottom: 12px;
-    }
-
-    &_hide {
-      @include devices.phone {
-        animation: fadeOut 0.2s;
-      }
-    }
-
-    &_hidden {
-      display: none;
-    }
-
-    @include devices.phone {
-      position: absolute;
-      left: 0;
-      right: 0;
-
-      background-color: #15151a;
-      opacity: 70%;
-    }
-
-    &_toggle {
-      display: none;
-
-      @include devices.phone {
-        display: flex;
-      }
-    }
-  }
-
-  &_loading {
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  &_control {
-    position: sticky;
-    left: 0;
-    right: 0;
-    top: 0;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    z-index: 10;
-
-    background-color: #282c34;
-    border: 1px solid #15151a;
-  }
-
-  &_console_control {
-    display: flex;
-    gap: 16px;
-  }
-
-  &_code {
-    grid-row: 1 / span 2;
-    overflow-y: auto;
-
-    @include devices.phone {
-      width: 100%;
-    }
-
-    & > * {
-      min-height: 100%;
-    }
-  }
-
-  &_console {
-    display: grid;
-    grid-template: 32px 1fr / 100%;
-    gap: 12px;
-
-    overflow-y: auto;
-  }
-
-  &_output {
-  }
-
-  &_button {
-    width: 32px;
-    height: 32px;
-
-    font-size: 18px;
-  }
-
-  &_error {
-    color: rgb(216, 34, 34);
-  }
-}
+@use "./styles/buttons.scss";
 
 pre {
   padding: 12px;
   font-size: 12;
-  background-color: #282c34;
+  background-color: #222;
   font-family: "ui-monospace" "SFMono-Regular" "SF Mono" Consolas Liberation
     Mono Menlo monospace;
 
@@ -141,4 +15,87 @@ pre {
   white-space: -pre-wrap;
   white-space: -o-pre-wrap;
   word-wrap: break-word;
+}
+
+.App {
+  display: grid;
+  grid-template: repeat(2, 50%) / repeat(2, 50%);
+  @include devices.phone {
+    grid-template: repeat(2, 1fr) / repeat(1, 1fr);
+  }
+
+  & > * {
+    padding: 12px 12px;
+  }
+  padding-top: 40px;
+
+  height: 100%;
+  width: 100%;
+
+  background-color: #111;
+
+  animation: fadeIn 2s;
+}
+
+.Editor {
+  grid-row: 1 / span 2;
+  overflow-y: auto;
+
+  @include devices.phone {
+    grid-row: 1 / 1;
+  }
+
+  & > * {
+    min-height: 100%;
+  }
+}
+
+.Tutorial {
+  @include devices.phone {
+    opacity: 80%;
+
+    padding-top: 32px;
+    border-radius: 0;
+
+    & h1 {
+      opacity: 100%;
+    }
+  }
+
+  height: calc(100% - 12px);
+
+  padding: 12px;
+  border-radius: 12px;
+  margin: 0;
+
+  background-color: #151515;
+
+  overflow-y: auto;
+
+  & * {
+    margin: 8px 0;
+  }
+
+  &_Toggle {
+    display: none;
+    @include devices.phone {
+      display: initial;
+    }
+  }
+}
+
+.Console {
+  display: grid;
+  grid-template: 32px 1fr / 100%;
+
+  overflow-y: auto;
+
+  &_Control {
+    display: flex;
+    gap: 8px;
+  }
+}
+
+.Error {
+  color: rgb(216, 34, 34);
 }

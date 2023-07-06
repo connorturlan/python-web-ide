@@ -3,10 +3,14 @@ import { useEffect, useState } from "react";
 import styles from "./App.module.scss";
 import "./styles/palette.scss";
 import { usePython } from "react-py";
-import { TutorialPanel } from "./utils/tutorial.jsx";
 import { loadPyFiles, loadTextFiles, readFile } from "./utils/filesystem";
 import { parse } from "yaml";
 import { bindAnimationEnd } from "./utils/animations";
+import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
+import TutorialPanel from "./components/TutorialPanel/TutorialPanel";
+import Panel from "./components/Panel/Panel";
+import Navbar from "./components/Navbar/Navbar";
+import Modal from "./components/Modal/Modal";
 
 var tutorials = [];
 
@@ -20,8 +24,7 @@ function App() {
   const [ready, setReady] = useState(false);
   const [pageIndex, setIndex] = useState(0);
   const [page, setPage] = useState(tutorials[pageIndex]);
-  const [isTutorialVisible, setTutorialVisible] = useState(true);
-  const [tutorialClassName, setTutorialClass] = useState(styles.ide_tutorial);
+  const [isModalVisible, setModalVisible] = useState(true);
 
   const {
     runPython,
@@ -42,31 +45,8 @@ function App() {
     interruptExecution();
   };
 
-  const showTutorial = () => {
-    setTutorialClass(styles.ide_tutorial);
-    setTutorialVisible(true);
-  };
-
-  const hideTutorial = () => {
-    setTutorialClass(styles.ide_tutorial_hidden);
-    setTutorialVisible(false);
-  };
-
-  const handleTutorialToggle = (event) => {
-    if (event.animationName === "fadeOut") {
-      console.log("show");
-      showTutorial();
-    } else {
-      console.log("hide");
-      hideTutorial();
-    }
-  };
-
-  const toggleTutorial = () => {
-    setTutorialVisible(!isTutorialVisible);
-    setTutorialClass(
-      !isTutorialVisible ? styles.ide_tutorial : styles.ide_tutorial_hidden
-    );
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
   };
 
   const loadModules = () => {
@@ -105,42 +85,44 @@ function App() {
   }, [pageIndex]);
 
   return isLoading ? (
-    <div className={styles.ide_loading}>
-      <div className={styles["lds-heart"]}>
-        <div></div>
-      </div>
-    </div>
+    <LoadingScreen />
   ) : (
     <>
-      <header className={styles.ide_control}>
+      <Navbar>
         <button
-          className={styles.ide_button}
+          className={styles.Button}
           onClick={() => {
             setIndex(pageIndex - 1);
           }}
           disabled={pageIndex <= 0}
         >
-          ⏮
+          {"←"}
         </button>
         <button
-          className={styles.ide_button + " " + styles.ide_tutorial_toggle}
-          onClick={toggleTutorial}
+          className={styles.Button + " " + styles.Tutorial_Toggle}
+          onClick={toggleModal}
         >
-          {"👁"}
-          {/* /* isTutorialVisible ? "hide" : "show" */}
+          {isModalVisible ? "hide" : "show"}
         </button>
         <button
-          className={styles.ide_button}
+          className={styles.Button}
           onClick={() => {
             setIndex(pageIndex + 1);
           }}
           disabled={pageIndex >= tutorials.length - 1}
         >
-          ⏭
+          {"→"}
         </button>
-      </header>
-      <main className={styles.ide}>
-        <div id="ide-code" className={styles.ide_code}>
+      </Navbar>
+
+      <Panel className={styles.App}>
+        <Modal visible={isModalVisible}>
+          <Panel className={styles.Tutorial}>
+            <TutorialPanel tutorialObject={page} />
+          </Panel>
+        </Modal>
+
+        <Panel className={styles.Editor}>
           <CodeEditor
             value={code}
             language="python"
@@ -150,53 +132,45 @@ function App() {
             autoComplete="yes"
             style={{
               fontSize: 14,
-              backgroundColor: "#282c34",
+              backgroundColor: "#222",
               fontFamily:
                 "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
             }}
           />
-        </div>
-
-        <div
-          id="ide-tutorial"
-          className={tutorialClassName}
-          onAnimationEnd={handleTutorialToggle}
-        >
-          <TutorialPanel tutorialObject={page} />
-          <div className={styles.ide_console}>
-            <div className={styles.ide_console_control}>
-              <button
-                id="ide-run"
-                className={styles.ide_button}
-                onClick={() => runCode(code)}
-                disabled={isLoading}
-              >
-                ⏵
-              </button>
-              <button
-                id="ide-test"
-                className={styles.ide_button}
-                onClick={haltCode}
-                disabled={isLoading}
-              >
-                ⏸
-              </button>
-            </div>
-
-            {/* stderr console. */}
-            {stderr && (
-              <pre id="console" className={styles.ide_error}>
-                {stderr}
-              </pre>
-            )}
-
-            {/* stdout console. */}
-            <pre id="console" className={styles.ide_output}>
-              {stdout}
-            </pre>
+        </Panel>
+        <div className={styles.Console}>
+          <div className={styles.Console_Control}>
+            <button
+              id="ide-run"
+              className={styles.Button}
+              onClick={() => runCode(code)}
+              disabled={isLoading}
+            >
+              RUN
+            </button>
+            <button
+              id="ide-test"
+              className={styles.Button}
+              onClick={haltCode}
+              disabled={isLoading}
+            >
+              HALT
+            </button>
           </div>
+
+          {/* stderr console. */}
+          {stderr && (
+            <pre id="console" className={styles.Error}>
+              {stderr}
+            </pre>
+          )}
+
+          {/* stdout console. */}
+          <pre id="console" className={styles.Console}>
+            {stdout}
+          </pre>
         </div>
-      </main>
+      </Panel>
     </>
   );
 }
