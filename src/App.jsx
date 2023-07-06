@@ -84,7 +84,7 @@ function App() {
     setCode(tutorials[pageIndex].example);
   }, [pageIndex]);
 
-  return isLoading ? (
+  return false ? (
     <LoadingScreen />
   ) : (
     <>
@@ -154,7 +154,7 @@ function App() {
               onClick={haltCode}
               disabled={isLoading}
             >
-              HALT
+              STOP
             </button>
           </div>
 

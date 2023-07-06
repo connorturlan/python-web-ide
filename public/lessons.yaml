@@ -1,4 +1,3 @@
----
 - title: "Hello, World!"
   content: |
     This is the tutorial text for a simple hello, world program.
@@ -6,35 +5,86 @@
     $print('hello, world!')
   example: |
     print('hello, world!')
-- title: "Assignment"
+- title: "Help!"
   content: |
-    By using a single '=' you can assign a value to a label called a Variable.
-    This allows you to use names in your code to reference values later in your program!
-    You can assign values to labels by using:
-    $apple = 0
-    $banana = 'fruit'
-    $cucumber = 100.0
-    Change the values on the left to be 1, 2, and 3 in order.
+    You can use:
+    $print()
+    To output the value of various contants and variables!
+    If you are ever stuck and want to know the contents of your program, don't be afraid to use it.
+  example: |
+    print(1)
+    print("This is a test.")
+    print({"a":1, "b":2})
+- title: "Variables"
+  content: |
+    You can use names to store values, here are some examples.
+    By using "=" any label on the left hand side will be assigned the value on the right.
+    Play around, add your own, and try print them out.
   example: |
     a = 0
-    b = 2
-    c = 8
-
+    b = "apple"
+    c = {}
     print(a, b, c)
-- title: Selection
+- title: "Lists"
   content: |
-    You can assign values to labels by using:
-    $apple = 0
-    $banana = 'fruit'
-    $cucumber = 100.0
-    Change the values on the left to be 1, 2, and 3 in order
+    There are also special variable types that can store more complicated data.
+    $list = [1, 2, 3]
+    Lists allow you to store multiple values in a single variable.
+    You can get a single value from it with:
+    $print(list[0])
+    This is called "indexing". Always remember that the index will start at 0!
+    Try print the 3rd element in this list.
   example: |
-    a = 10
-
-    if a == 5:
-      print('congrats!')
-    else: 
-      print('bad luck :(')
+    my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    print(my_list[0])
+- title: "Dictionaries"
+  content: |
+    Dictionaries are like lists, but instead of using numbers to index them we can use strings like so:
+    $dictionary = {"apples": 20, "bananas": 10}
+    And you can get a value from it with:
+    $print(dictionary["apples"])
+    You can also store lists and dictionaries within each other to create even more complex data, but we'll come back to that later.
+    Add a new key to the dictionary to remove the error.
+  example: |
+    my_dictionary = {"apples": 20, "bananas": 10}
+    print(my_dictionary["carrots"])
+- title: "If Statements"
+  content: |
+    'if' statements let you control the flow of your program.
+    They are structured like so:
+    $if <condition>:
+    $   do this
+    $else:
+    $   do that
+    You don't always need an else block but it will prevent you duplicating code!
+    That's right! Programmers like to be lazy :)
+    Try changing the program to print out "success!"
+  example: |
+    b = 1
+    if b == 2:
+        print("success")
+    else:
+        print("fail")
+- title: "For Loops"
+  content: |
+    .
+  example: |
+    .
+- title: "While Loops"
+  content: |
+    .
+  example: |
+    .
+- title: "Variables"
+  content: |
+    .
+  example: |
+    .
+- title: "Variables"
+  content: |
+    .
+  example: |
+    .
 - title: "Text Generator"
   content: "Hit run! You can trust me. ;)"
   example: |
