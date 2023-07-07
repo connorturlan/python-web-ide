@@ -25,24 +25,22 @@ function App() {
   const [pageIndex, setIndex] = useState(0);
   const [page, setPage] = useState(tutorials[pageIndex]);
   const [isModalVisible, setModalVisible] = useState(true);
+  const [enableNext, setEnableNext] = useState(true);
+  const [err, setError] = useState("");
 
   const {
     runPython,
     stdout,
     stderr,
     isLoading,
-    isRunning,
     interruptExecution,
     writeFile,
     mkdir,
   } = usePython();
 
   const runCode = () => {
+    setError("");
     runPython(code);
-  };
-
-  const haltCode = () => {
-    interruptExecution();
   };
 
   const toggleModal = () => {
@@ -80,14 +78,35 @@ function App() {
       return;
     }
 
-    setPage(tutorials[pageIndex]);
-    setCode(tutorials[pageIndex].example);
+    const nextPage = tutorials[pageIndex];
+
+    setPage(nextPage);
+    setCode(nextPage.example);
+    setEnableNext(!nextPage.expect);
   }, [pageIndex]);
+
+  // allow tests to block turning the page.
+  // TODO: add page history.
+  useEffect(() => {
+    if (!isLoading && stdout && page.expect) {
+      const isExpected = stdout == page.expect;
+      setError(
+        isExpected ? "" : `Expected: ${page.expect.slice(0, -1)}, Got ${stdout}`
+      );
+      setEnableNext(isExpected);
+    }
+  }, [stdout]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setError(stderr);
+    }
+  }, [stderr]);
 
   return false ? (
     <LoadingScreen />
   ) : (
-    <>
+    <div className={styles.App_Container}>
       <Navbar>
         <button
           className={styles.Button}
@@ -109,7 +128,7 @@ function App() {
           onClick={() => {
             setIndex(pageIndex + 1);
           }}
-          disabled={pageIndex >= tutorials.length - 1}
+          disabled={!enableNext || pageIndex >= tutorials.length - 1}
         >
           {"→"}
         </button>
@@ -151,7 +170,7 @@ function App() {
             <button
               id="ide-test"
               className={styles.Button}
-              onClick={haltCode}
+              onClick={interruptExecution}
               disabled={isLoading}
             >
               STOP
@@ -159,9 +178,9 @@ function App() {
           </div>
 
           {/* stderr console. */}
-          {stderr && (
+          {err && (
             <pre id="console" className={styles.Error}>
-              {stderr}
+              {err}
             </pre>
           )}
 
@@ -171,7 +190,7 @@ function App() {
           </pre>
         </div>
       </Panel>
-    </>
+    </div>
   );
 }
 

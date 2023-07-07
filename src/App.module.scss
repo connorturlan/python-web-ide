@@ -3,6 +3,7 @@
 @use "./styles/buttons.scss";
 
 pre {
+  margin: 0;
   padding: 12px;
   font-size: 12;
   background-color: #222;
@@ -15,6 +16,8 @@ pre {
   white-space: -pre-wrap;
   white-space: -o-pre-wrap;
   word-wrap: break-word;
+
+  border-radius: 12px;
 }
 
 .App {
@@ -29,12 +32,16 @@ pre {
   }
   padding-top: 40px;
 
-  height: 100%;
-  width: 100%;
-
   background-color: #111;
 
   animation: fadeIn 2s;
+
+  &_Container {
+    display: grid;
+    grid-template-rows: auto fill;
+    height: 100%;
+    width: 100%;
+  }
 }
 
 .Editor {
@@ -47,6 +54,8 @@ pre {
 
   & > * {
     min-height: 100%;
+
+    border-radius: 12px;
   }
 }
 
@@ -62,7 +71,7 @@ pre {
     }
   }
 
-  height: calc(100% - 12px);
+  height: 100%;
 
   padding: 12px;
   border-radius: 12px;
@@ -86,16 +95,19 @@ pre {
 
 .Console {
   display: grid;
-  grid-template: 32px 1fr / 100%;
+  grid-template: 48px 1fr / 100%;
 
   overflow-y: auto;
 
   &_Control {
     display: flex;
+    align-items: center;
     gap: 8px;
   }
 }
 
 .Error {
-  color: rgb(172, 8, 8);
+  color: #ff1f1f;
+
+  animation: fadeIn 0.5s;
 }

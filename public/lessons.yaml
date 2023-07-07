@@ -37,6 +37,14 @@
   example: |
     my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     print(my_list[0])
+- title: "Variables - Test"
+  content: |
+    Make the print statement output the 3rd element of the list.
+  example: |
+    my_list = [0, 1, 2, 3]
+    print(my_list[0])
+  expect: |
+    2
 - title: "Dictionaries"
   content: |
     Dictionaries are like lists, but instead of using numbers to index them we can use strings like so:
@@ -65,6 +73,8 @@
         print("success")
     else:
         print("fail")
+  expect: |
+    success
 - title: "For Loops"
   content: |
     .

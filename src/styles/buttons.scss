@@ -1,6 +1,30 @@
 .Button {
   min-width: 32px;
-  height: 32px;
+  min-height: 32px;
 
   font-size: 18px;
+
+  border: none;
+  border-radius: 8px;
+  padding: 0 8px;
+
+  background-color: #333;
+
+  &:hover {
+    background-color: #444;
+    outline: 2px solid #555;
+  }
+
+  &:active {
+    background-color: #444;
+    outline: 2px solid #ffd64f;
+  }
+
+  &:disabled {
+    background-color: #282828;
+    color: #333;
+    &:hover {
+      outline: 2px solid #fd2003;
+    }
+  }
 }
