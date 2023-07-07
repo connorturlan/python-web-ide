@@ -12,11 +12,18 @@ export const TutorialPanel = ({ tutorialObject }) => {
     <>
       <h1>{title}</h1>
       {content.split("\n").map((line, index) => {
-        return line.at(0) == "$" ? (
-          <pre key={index}>{line.slice(1)}</pre>
-        ) : (
-          <p key={index}>{line}</p>
-        );
+        switch (line.at(0)) {
+          case "$":
+            return <pre key={index}>{line.slice(1)}</pre>;
+          case "!":
+            return (
+              <p className={styles.Test} key={index}>
+                {line.slice(1)}
+              </p>
+            );
+          default:
+            return <p key={index}>{line}</p>;
+        }
       })}
     </>
   );

@@ -11,6 +11,7 @@ import TutorialPanel from "./components/TutorialPanel/TutorialPanel";
 import Panel from "./components/Panel/Panel";
 import Navbar from "./components/Navbar/Navbar";
 import Modal from "./components/Modal/Modal";
+import { getCookie, setCookie } from "./utils/cookies";
 
 var tutorials = [];
 
@@ -55,6 +56,29 @@ function App() {
     loadPyFiles(writeFile);
   };
 
+  const ChangePage = (i) => {
+    // save the code for this page.
+    SaveCode(code);
+
+    // update the page.
+    setIndex(pageIndex + i);
+  };
+
+  const SaveCode = (c) => {
+    const safe = encodeURI(c);
+    setCookie(`Code${pageIndex}`, safe);
+  };
+
+  const LoadCode = () => {
+    const safe = getCookie(`Code${pageIndex}`);
+    return decodeURI(safe);
+  };
+
+  const ResetCode = () => {
+    setCookie(`Code${pageIndex}`, "");
+    setCode(page.example);
+  };
+
   // on page load.
   useEffect(() => {
     loadTutorial(setCode);
@@ -80,8 +104,9 @@ function App() {
 
     const nextPage = tutorials[pageIndex];
 
+    // update the state.
     setPage(nextPage);
-    setCode(nextPage.example);
+    setCode(LoadCode(`Code${pageIndex}`) || nextPage.example);
     setEnableNext(!nextPage.expect);
   }, [pageIndex]);
 
@@ -111,26 +136,26 @@ function App() {
         <button
           className={styles.Button}
           onClick={() => {
-            setIndex(pageIndex - 1);
+            ChangePage(-1);
           }}
           disabled={pageIndex <= 0}
         >
-          {"←"}
+          {"PREV"}
         </button>
         <button
           className={styles.Button + " " + styles.Tutorial_Toggle}
           onClick={toggleModal}
         >
-          {isModalVisible ? "hide" : "show"}
+          {isModalVisible ? "HIDE" : "SHOW"}
         </button>
         <button
           className={styles.Button}
           onClick={() => {
-            setIndex(pageIndex + 1);
+            ChangePage(1);
           }}
           disabled={!enableNext || pageIndex >= tutorials.length - 1}
         >
-          {"→"}
+          {"NEXT"}
         </button>
       </Navbar>
 
@@ -174,6 +199,13 @@ function App() {
               disabled={isLoading}
             >
               STOP
+            </button>
+            <button
+              id="ide-reset"
+              className={styles.Button}
+              onClick={ResetCode}
+            >
+              RESET
             </button>
           </div>
 

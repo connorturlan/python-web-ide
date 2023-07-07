@@ -98,6 +98,7 @@ pre {
   grid-template: 48px 1fr / 100%;
 
   overflow-y: auto;
+  gap: 8px;
 
   &_Control {
     display: flex;

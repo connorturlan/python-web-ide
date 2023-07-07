@@ -39,7 +39,7 @@
     print(my_list[0])
 - title: "Variables - Test"
   content: |
-    Make the print statement output the 3rd element of the list.
+    !Make the print statement output the 3rd element of the list.
   example: |
     my_list = [0, 1, 2, 3]
     print(my_list[0])
@@ -66,7 +66,7 @@
     $   do that
     You don't always need an else block but it will prevent you duplicating code!
     That's right! Programmers like to be lazy :)
-    Try changing the program to print out "success!"
+    !Try changing the program to print out "success!"
   example: |
     b = 1
     if b == 2:
