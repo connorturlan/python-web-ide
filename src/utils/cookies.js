@@ -35,12 +35,10 @@ export const LoadCode = (pageIndex) => {
 
 export const SaveTestResult = (pageIndex, result) => {
 	const safe = encodeURI(result);
-	// setCookie(`Code${pageIndex}Test`, result);
-	localStorage.setItem(`Code${pageIndex}Test`, safe);
+	setCookie(`Code${pageIndex}Test`, safe);
 };
 
 export const LoadTestResult = (pageIndex) => {
-	// const safe = getCookie(`Code${pageIndex}Test`);
-	const safe = localStorage.getItem(`Code${pageIndex}Test`);
-	return safe === null ? undefined : decodeURI(safe);
+	const safe = getCookie(`Code${pageIndex}Test`);
+	return decodeURI(safe);
 };
