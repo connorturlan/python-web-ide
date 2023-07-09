@@ -157,7 +157,7 @@ function App() {
 		}
 	}, [stderr]);
 
-	return false ? (
+	return isLoading ? (
 		<LoadingScreen />
 	) : (
 		<div className={styles.App_Container}>
