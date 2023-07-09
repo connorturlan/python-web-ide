@@ -2,23 +2,27 @@
 @use "../../styles/animation";
 
 .Modal {
-  @include devices.phone {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 5;
-  }
+	@include devices.phone {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 5;
+	}
 
-  &Show {
-    display: block;
-    animation: fadeIn 0.2s;
-  }
-  &Hide {
-    @include devices.phone {
-      display: none;
-    }
-    animation: fadeOut 0.2s;
-  }
+	&Show {
+		display: block;
+		animation: fadeIn 0.2s;
+	}
+
+	&Hide {
+		@include devices.phone {
+			display: none;
+		}
+	}
+
+	&Hiding {
+		animation: fadeOut 0.2s;
+	}
 }
