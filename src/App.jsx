@@ -5,7 +5,6 @@ import "./styles/palette.scss";
 import { usePython } from "react-py";
 import { loadPyFiles, loadTextFiles, readFile } from "./utils/filesystem";
 import { parse } from "yaml";
-import { bindAnimationEnd } from "./utils/animations";
 import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
 import TutorialPanel from "./components/TutorialPanel/TutorialPanel";
 import Panel from "./components/Panel/Panel";
@@ -105,15 +104,11 @@ function App() {
 
 		// update the state.
 		setPage(nextPage);
-		const loaded = LoadCode(pageIndex);
-		const original = nextPage.example;
-		console.log(loaded, !!loaded, original, loaded || original);
 		setCode(LoadCode(pageIndex) || nextPage.example);
-		setEnableNext(!nextPage.expect);
+		setEnableNext(!nextPage.isTest || LoadTestResult(pageIndex));
 	}, [pageIndex]);
 
 	// allow tests to block turning the page.
-	// TODO: add page history.
 	useEffect(() => {
 		if (!isLoading && stdout && page.expect) {
 			// check the cached expected result.
@@ -123,7 +118,31 @@ function App() {
 			setError(
 				isExpected
 					? ""
-					: `Expected: ${page.expect.slice(0, -1)}, Got ${stdout}`
+					: `Expected:\n"${page.expect.slice(
+							0,
+							-1
+					  )}"\n\nBut got:\n"${stdout.slice(0, -1)}"`
+			);
+
+			// enable or disable the next page button.
+			setEnableNext(isExpected || LoadTestResult(pageIndex));
+			SaveTestResult(pageIndex, isExpected || LoadTestResult(pageIndex));
+		}
+		if (!isLoading && stdout && page.expect_end) {
+			// check the cached expected result.
+			const isExpected = stdout.split("\n").at(-1) == page.expect_end;
+
+			// set the error string depending on the result.
+			setError(
+				isExpected
+					? ""
+					: `Expected output to end with:\n"${page.expect_end.slice(
+							0,
+							-1
+					  )}"\n\nBut got:\n"${stdout
+							.split("\n")
+							.at(-1)
+							.slice(0, -1)}"`
 			);
 
 			// enable or disable the next page button.
@@ -152,6 +171,9 @@ function App() {
 				>
 					{"PREV"}
 				</button>
+				<p className={styles.Tutorial_Index}>
+					{pageIndex + 1}/{tutorials.length}
+				</p>
 				<button
 					className={styles.Button + " " + styles.Tutorial_Toggle}
 					onClick={toggleModal}

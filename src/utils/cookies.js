@@ -24,23 +24,23 @@ export function getCookie(cname) {
 export const SaveCode = (pageIndex, c) => {
 	const safe = encodeURI(c);
 	// setCookie(`Code${pageIndex}`, safe);
-	sessionStorage.setItem(`Code${pageIndex}`, safe);
+	localStorage.setItem(`Code${pageIndex}`, safe);
 };
 
 export const LoadCode = (pageIndex) => {
 	// const safe = getCookie(`Code${pageIndex}`);
-	const safe = sessionStorage.getItem(`Code${pageIndex}`);
+	const safe = localStorage.getItem(`Code${pageIndex}`);
 	return safe === null ? undefined : decodeURI(safe);
 };
 
 export const SaveTestResult = (pageIndex, result) => {
 	const safe = encodeURI(result);
 	// setCookie(`Code${pageIndex}Test`, result);
-	sessionStorage.setItem(`Code${pageIndex}Test`, safe);
+	localStorage.setItem(`Code${pageIndex}Test`, safe);
 };
 
 export const LoadTestResult = (pageIndex) => {
 	// const safe = getCookie(`Code${pageIndex}Test`);
-	const safe = sessionStorage.getItem(`Code${pageIndex}Test`);
+	const safe = localStorage.getItem(`Code${pageIndex}Test`);
 	return safe === null ? undefined : decodeURI(safe);
 };

@@ -91,6 +91,12 @@ pre {
 			display: initial;
 		}
 	}
+
+	&_Index {
+		margin: auto 0;
+		padding: 0 16px;
+		justify-self: flex-start;
+	}
 }
 
 .Console {
