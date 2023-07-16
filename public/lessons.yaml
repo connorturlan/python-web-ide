@@ -139,7 +139,7 @@
       import random
       word_list = "Sphinx of black quartz judge my vow".split()
       print(random.choice(word_list))
-- title: "Give me a word. Any word."
+- title: "Give me a word... any word."
   content: |
       In frequency based text generation, you're given a dictionary of words and the chance that they will follow the previous one.
       You will expect the structure to be:
