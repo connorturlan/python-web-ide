@@ -130,19 +130,14 @@ function App() {
 		}
 		if (!isLoading && stdout && page.expect_end) {
 			// check the cached expected result.
-			const isExpected = stdout.split("\n").at(-1) == page.expect_end;
+			const output = stdout.slice(0, -1).split("\n").at(-1);
+			const isExpected = output == page.expect_end;
 
 			// set the error string depending on the result.
 			setError(
 				isExpected
 					? ""
-					: `Expected output to end with:\n"${page.expect_end.slice(
-							0,
-							-1
-					  )}"\n\nBut got:\n"${stdout
-							.split("\n")
-							.at(-1)
-							.slice(0, -1)}"`
+					: `Expected output to end with:\n"${page.expect_end}"\n\nBut got:\n"${output}"`
 			);
 
 			// enable or disable the next page button.
