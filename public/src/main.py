@@ -48,13 +48,16 @@ def parse_text(text):
     for word in text[1:]:
         # insert the word into the freq list.
         if last_word not in freq:
-            freq[last_word] = {}
+            freq[last_word] = []
 
         # increase the freq.
-        if word not in freq[last_word]:
-            freq[last_word][word] = 0
+        # if word not in freq[last_word]:
+        #     freq[last_word][word] = 0
 
-        freq[last_word][word] += 1
+        # freq[last_word][word] += 1
+
+        # add the word to the trailing word list of the last word.
+        freq[last_word].append(word)
 
         # set the new last word.
         last_word = word
@@ -68,7 +71,8 @@ def expand_word_list(words):
 
 def get_next_word(words):
     # return the next random word given a probability dictionary.
-    return random.choice(expand_word_list(words))
+    # return random.choice(expand_word_list(words))
+    return random.choice(words)
 
 
 def construct_sentence(freq, word_constructor=get_next_word):
@@ -117,3 +121,5 @@ def generate_text_from_file(filename,
     print(passage)
 
     print("===== done =====")
+
+generate_text_from_file("./public/drseuss.txt")
