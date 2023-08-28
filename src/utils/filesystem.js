@@ -12,7 +12,12 @@ export const loadFiles = (hook, filenames) => {
 };
 
 export const loadTextFiles = (loadHook) => {
-  const files = ["./drseuss.txt", "./thelorax.txt", "./philosophy.txt"];
+  const files = [
+    "./drseuss.txt",
+    "./thelorax.txt",
+    "./philosophy.txt",
+    "./fox.txt",
+  ];
   loadFiles(loadHook, files);
 };
 

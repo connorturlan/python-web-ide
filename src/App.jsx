@@ -134,6 +134,7 @@ function App() {
       // check the cached expected result.
       const output = stdout.slice(0, -1).split("\n").at(-1);
       const isExpected = output == page.expect_end;
+      console.log(output, page.expect_end);
 
       // set the error string depending on the result.
       setError(
@@ -243,7 +244,7 @@ function App() {
           {/* stderr console. */}
           {err && (
             <pre id="console" className={styles.Error}>
-              {err}
+              {stderr || err}
             </pre>
           )}
 
