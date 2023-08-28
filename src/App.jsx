@@ -22,7 +22,7 @@ import {
 import HintPanel from "./components/HintPanel/HintPanel";
 
 var tutorials = [];
-const DEBUG = true;
+const DEBUG = false;
 
 const loadTutorial = async () => {
   const rawFile = await readFile("./lessons.yaml");
@@ -37,6 +37,9 @@ function App() {
   const [isModalVisible, setModalVisible] = useState(true);
   const [enableNext, setEnableNext] = useState(true);
   const [err, setError] = useState("");
+  const [solution, setSolution] = useState("");
+  const [solutionAvailable, allowSolution] = useState(true);
+  const [solutionVisible, showSolution] = useState(false);
 
   const {
     runPython,
@@ -79,6 +82,10 @@ function App() {
     setCode(page.example);
   };
 
+  const ShowSolution = () => {
+    showSolution(!solutionVisible);
+  };
+
   // on page load.
   useEffect(() => {
     loadTutorial(setCode);
@@ -107,7 +114,17 @@ function App() {
     // update the state.
     setPage(nextPage);
     setCode(LoadCode(pageIndex) || nextPage.example);
+    setSolution(nextPage.solution || nextPage.example);
     setEnableNext(!nextPage.isTest || LoadTestResult(pageIndex));
+
+    // hide the solution.
+    allowSolution(false);
+    showSolution(false);
+
+    // allow the solution after 2 minutes.
+    setTimeout(() => {
+      allowSolution(true);
+    }, 1_000);
   }, [pageIndex]);
 
   // allow tests to block turning the page.
@@ -200,10 +217,12 @@ function App() {
 
         <Panel className={styles.Editor}>
           <CodeEditor
-            value={code}
+            value={solutionVisible ? solution : code}
             language="python"
             placeholder="Please enter Python code."
-            onChange={(e) => setCode(e.target.value)}
+            onChange={(e) =>
+              !solutionVisible ? setCode(e.target.value) : () => {}
+            }
             padding={15}
             autoComplete="yes"
             style={{
@@ -239,6 +258,15 @@ function App() {
             >
               RESET
             </button>
+            {solutionAvailable && (
+              <button
+                id="ide-solution"
+                className={styles.Button}
+                onClick={ShowSolution}
+              >
+                SOLUTION
+              </button>
+            )}
           </div>
 
           {/* stderr console. */}
