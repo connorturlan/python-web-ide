@@ -1,16 +1,19 @@
 @use "../../styles/palette";
+@use "../../styles/devices";
 
 .HintPanel {
   grid-row: 1 / span 2;
   gap: 20px;
+
+  @include devices.phone {
+    display: none;
+  }
 }
 
 .HintCodes {
   &:hover {
     background-color: #999;
   }
-
-  //   border-radius: 0;
 
   margin-bottom: 10px;
 }
