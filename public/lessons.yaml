@@ -5,6 +5,11 @@
     $print('hello, world!')
   example: |
     print('hello, world!')
+  hint:
+    title: print("hello, world!")
+    content: |
+      print any string of characters between the parenthesises
+      hehehe
 - title: "Help!"
   content: |
     You can use:
@@ -24,7 +29,13 @@
     a = 0
     b = "apple"
     c = {}
-    print(a, b, c)
+    d = b
+    print(a, b, c, d)
+  hint:
+    title: variable = value
+    content: |
+      set the label on the left to the value on the right
+      this can be a number, "string", or list!
 - title: "Lists"
   content: |
     There are also special variable types that can store more complicated data.
@@ -145,32 +156,22 @@
     lists can be made longer by using:
     $a = [1, 2, 3]
     .b = [4, 5, 6]
-    .c = a.extend(b)
-    .print(c)
+    .a.extend(b)
+    .print(a)
     which will print
     $ [1, 2, 3, 4, 5, 6]
     !try and extend the next list
   example: |
     a = ["apple"]
     b = ["banana"]
-    c = #join the lists here.
-    print(c)
-
-- title: "Making a list, and checking it twice."
-  content: |
-
-  example: |
-    word_freq = {"apple": 1, "banana": 2, "nectarine": 3}
-
-    generate_text_from_file('./drseuss.txt', word=get_next_word)
-  isTest: true
-  expect_end: ===== done =====
+    #join the lists here.
+    print(a)
 - title: "Give me a word... any word."
   content: |
-    In frequency based text generation, you're given a dictionary of words and the chance that they will follow the previous one.
+    In frequency based text generation, you're given a list of words and the chance that they will follow the previous one.
+    For this example we will simplify and give you
     You will expect the structure to be:
-    $word_freq = {"apple": 1, "banana": 2}
-    You can use "expand_word_list" to get a one layer list to select a word from.
+    $word_list = ["apple", "banana", "cracker"]
   example: |
     from src.main import generate_text_from_file, expand_word_list
     import random
@@ -182,11 +183,6 @@
     generate_text_from_file('./drseuss.txt', word=get_next_word)
   isTest: true
   expect_end: ===== done =====
-- title: "Variables"
-  content: |
-    .
-  example: |
-    .
 - title: "Text Generator"
   content: "Hit run! You can trust me. ;)"
   example: |

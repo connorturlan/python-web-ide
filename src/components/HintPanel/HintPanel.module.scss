@@ -1,0 +1,16 @@
+@use "../../styles/palette";
+
+.HintPanel {
+  grid-row: 1 / span 2;
+  gap: 20px;
+}
+
+.HintCodes {
+  &:hover {
+    background-color: #999;
+  }
+
+  //   border-radius: 0;
+
+  margin-bottom: 10px;
+}
