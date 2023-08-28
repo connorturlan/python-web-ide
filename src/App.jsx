@@ -22,7 +22,7 @@ import {
 import HintPanel from "./components/HintPanel/HintPanel";
 
 var tutorials = [];
-const DEBUG = false;
+const DEBUG = true;
 
 const loadTutorial = async () => {
   const rawFile = await readFile("./lessons.yaml");

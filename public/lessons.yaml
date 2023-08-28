@@ -81,7 +81,7 @@
   content: |
     'if' statements let you control the flow of your program.
     They are structured like so:
-    $if <condition>:
+    $if a == b or a != c:
     .   do this
     .else:
     .   do that
@@ -246,13 +246,12 @@
 
 - title: "Let's make some sentences."
   content: |
-    Ladeedah...
     $word_map
     contains all of the trailing words that follow a given word, and looks like:
     ${"the": ["quick", "lazy"], "quick": ["brown"], ...}4
     !using the get next word function provided, generate a sentence that ends when the next word is '.'.
      ...yes we are going to count a full stop as a word!
-    don't forget to join the list into a string before you return
+    don't forget to join the list into a string before you return!
   example: |
     from src.main import generate_text_from_file
     import random
@@ -292,7 +291,9 @@
     {'the': [], 'quick': [], 'brown': [], 'fox': [], 'jumps': [], 'over': [], 'lazy': [], 'dog': [], '.': []}
 
 - title: "Put it all together now!"
-  content: "Hit run! You can trust me. ;)"
+  content: |
+    Copy all your code from the previous lessons and integrate it here.
+    Don't worry, all you code is saved when you go back and forth.
   example: |
     from src.main import Reader, generate_text_from_file
     import random
@@ -319,7 +320,12 @@
     generate_text_from_file('./drseuss.txt', parse=parse_text, sentence=construct_sentence, word=get_next_word)
 
 - title: "Text Generator"
-  content: "Hit run! You can trust me. ;)"
+  content: |
+    This is the final product for a text generator.
+    Feel free to change to file other texts available are:
+    $drseuss.txt
+    .thelorax.txt
+    .philosophy.txt
   example: |
     from src.main import generate_text_from_file
     generate_text_from_file('./thelorax.txt')
