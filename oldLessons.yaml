@@ -1,0 +1,41 @@
+- title: "Hello, World!"
+  content: |
+    This is the tutorial text for a simple hello, world program.
+    Write the below line to get the console to print out 'Hello, World!'.
+    $print('hello, world!')
+  example: |
+    print('hello, world!')
+- title: "Assignment"
+  content: |
+    By using a single '=' you can assign a value to a label called a Variable.
+    This allows you to use names in your code to reference values later in your program!
+    You can assign values to labels by using:
+    $apple = 0
+    $banana = 'fruit'
+    $cucumber = 100.0
+    Change the values on the left to be 1, 2, and 3 in order.
+  example: |
+    a = 0
+    b = 2
+    c = 8
+
+    print(a, b, c)
+- title: Selection
+  content: |
+    You can assign values to labels by using:
+    $apple = 0
+    $banana = 'fruit'
+    $cucumber = 100.0
+    Change the values on the left to be 1, 2, and 3 in order
+  example: |
+    a = 10
+
+    if a == 5:
+      print('congrats!')
+    else: 
+      print('bad luck :(')
+- title: "Text Generator"
+  content: "Hit run! You can trust me. ;)"
+  example: |
+    from src.main import generate_text_from_file
+    generate_text_from_file('./thelorax.txt')
