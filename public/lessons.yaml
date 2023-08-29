@@ -353,7 +353,7 @@
       for word in text:
         word_freq[word] = []
       # and above here!
-      return word
+      return word_freq
 
     # don't touch this code...
     text = Reader()
