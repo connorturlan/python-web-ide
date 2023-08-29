@@ -240,7 +240,7 @@
 - title: "Give me a word... any word."
   content: |
     In frequency based text generation, you're given a list of words and the chance that they will follow the previous one.
-    For this example we will simplify and give you
+    For this example we will simplify and give you an array of words to choose from.
     You will expect the structure to be:
     $word_list = ["apple", "banana", "cracker"]
   example: |
