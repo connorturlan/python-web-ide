@@ -124,7 +124,7 @@ function App() {
     // allow the solution after 2 minutes.
     setTimeout(() => {
       allowSolution(true);
-    }, 1_000);
+    }, 120_000);
   }, [pageIndex]);
 
   // allow tests to block turning the page.
