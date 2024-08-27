@@ -22,7 +22,7 @@ jobs:
           token: ${{ secrets.REPO_TOKEN }}
       - run: npm i
       - run: npm run build
-      - run: git add dist/
+      - run: git add -f dist/
       - run: git commit -m "pages deploy"
       - run: git push origin main:gh-pages
 
