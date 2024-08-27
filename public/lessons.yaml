@@ -71,17 +71,21 @@
 
 - title: "Dictionaries"
   content: |
-    Dictionaries are like lists, but instead of using numbers to index them we can use strings like so:
+    Dictionaries are like lists, like real dictionaries we can use words to find meanings!
+    For example:
     $dictionary = {"apples": 20, "bananas": 10}
-    And you can get a value from it with:
+    Would define "apples" to be the number 20, and "bananas" to be the number 10. 
+    And you can get the value from it using:
     $print(dictionary["apples"])
+    Where the word in the brakets is the meaning you want to find!
     To add items to the dictionary you can use:
-    $dictionary["<key>"] = <value> # just like with variables!
+    $dictionary["cherry"] = 42 # just like with variables!
+    !btw '#' is a comment and includes code that won't be used.
     You can also store lists and dictionaries within each other to create even more complex data, but we'll come back to that later.
-    Add a new key to the dictionary to remove the error.
+    Add a new word to the dictionary to remove the error about the missing cherry.
   example: |
     my_dictionary = {"apples": 20, "bananas": 10}
-    print(my_dictionary["apples"])
+    print(my_dictionary["cherries"])
   hint:
     title: my_dict[string]
     content: |
@@ -95,6 +99,13 @@
     .   do this
     .else:
     .   do that
+    You can use:
+    $ a == b   # <-- a is equal to b
+    . a != b   # <-- a is NOT equal to b
+    . a < b    # <-- a is less than to b
+    . a > b    # <-- a is greater than to b
+    . a <= b   # <-- a is less than or equal to b
+    . a >= b   # <-- what do you think this means?
     You don't always need an else block but it will prevent you duplicating code!
     That's right! Programmers like to be lazy :)
     !Try changing the program to print out "success!"
@@ -124,6 +135,13 @@
     content: |
       if the condition is true do this, otherwise do that.
       remember that every line after a colon ':' needs to be indented.
+
+      a == b   # <-- a is equal to b
+      a != b   # <-- a is NOT equal to b
+      a < b    # <-- a is less than to b
+      a > b    # <-- a is greater than to b
+      a <= b   # <-- a is less than or equal to b
+      a >= b   # <-- what do you think this means?
 
 - title: Go Fish
   content: |
