@@ -15,7 +15,7 @@
   content: |
     You can use:
     $print()
-    To output the value of various contants and variables!
+    To output the value of various constants and variables!
     If you are ever stuck and want to know the contents of your program, don't be afraid to use it.
   example: |
     print(1)
@@ -27,6 +27,7 @@
     You can use names to store values, here are some examples.
     By using "=" any label on the left hand side will be assigned the value on the right.
     Play around, add your own, and try print them out.
+    Strings are words or sentences, variables are numbers.
   example: |
     a = 0
     b = "apple"
@@ -77,12 +78,12 @@
     Would define "apples" to be the number 20, and "bananas" to be the number 10. 
     And you can get the value from it using:
     $print(dictionary["apples"])
-    Where the word in the brakets is the meaning you want to find!
+    Where the word in the brackets is the meaning you want to find!
     To add items to the dictionary you can use:
     $dictionary["cherry"] = 42 # just like with variables!
-    !btw '#' is a comment and includes code that won't be used.
+    !by the way, '#' is a comment and includes code that won't be used.
     You can also store lists and dictionaries within each other to create even more complex data, but we'll come back to that later.
-    Add a new word to the dictionary to remove the error about the missing cherry.
+    !Add a new word to the dictionary to remove the error about the missing cherry.
   example: |
     my_dictionary = {"apples": 20, "bananas": 10}
     print(my_dictionary["cherries"])
@@ -110,6 +111,7 @@
     That's right! Programmers like to be lazy :)
     !Try changing the program to print out "success!"
   example: |
+    # modify this.
     b = 1
 
     # leave this code unchanged.
@@ -155,10 +157,10 @@
   example: |
     store = {"apples": 20, "bananas": 10}
 
-    print("i'm craving a crepe, i'll add 10 to my cart!")
+    print("i'm craving some cherries, i'll add 10 to my cart!")
 
-    # add a statement here to make sure there are crepes in the store.
-    print("oh... they only have", store["crepes"], "crepes")
+    # add a statement here to make sure there are cherries in the store.
+    print("oh... they only have", store["cherries"], "cherries")
   hint:
     title: my_dict[string]
     content: |
@@ -166,11 +168,12 @@
 
 - title: "For Loops"
   content: |
-    For loops are a way of repeating sections of code without having to write anymore code.
+    For loops are a way of repeating sections of code without having to write more code.
     We can count from 0 to 9 by using:
     $for i in range(10):
     .    print(i)
     Notice that this doesn't include the last number!
+    For note, range(10) in this will count from 0 to 9, and will not include 10.
   example: |
     for i in range(3):
       print(i)
@@ -181,35 +184,13 @@
     content: |
       repeat this n times, store how many times we've looped in 'i'.
 
-# - title: "While Loops"
-#   content: |
-#     While loops are similar to For loops, but instead of doing something a set amount of times, they will continue while a give statement is true.
-#     We can count from 0 to 9 by using:
-#     $i = 0
-#     .while i <= 10:
-#     .    print(i)
-#     .    i = i + 1
-#     Notice that this doesn't include the last number!
-#     !Always make sure that you change the value inside the while loop or you'll have an infinite loop!!!
-#   example: |
-#     i = 0
-#     while i < 3:
-#       print(i)
-#       i = i + 1
-#   hint:
-#     title: |
-#       while <condition>:
-#       --do this
-#     content: |
-#       repeat while <condition> is true.
-
 - title: "Loopy Lists"
   content: |
     You can use For loops to go through a list like so:
     $my_words = ["The", "quick", "brown", "fox"]
     .for word in my_words:
     .    print(word)
-    This will, for each loop print out the next word in the list!
+    For each loop, this will print out the next word in the list!
     !Now do the same thing with the new word list!
   example: |
     word_list = ["jumps", "over", "the", "lazy", "dog"]
@@ -230,7 +211,7 @@
     You can get a random number within a range by using:
     $random.randrange(n, m)
     Where "n" is the minimum and "m" is the maximum.
-    If you're every using this, make sure to import the random module first!
+    If you're ever using this, make sure to import the random module first!
     !Try running the code on the left and see what you get each time.
   example: |
     import random
@@ -246,7 +227,7 @@
     You can also use this to choose a random item from a list, the random module gives us:
     $random.choice()
     Try it with the word list provided!
-    P.S. The ".split()" method generates a list from a string, breaking it on certain characters.
+    P.S. The "list.split()" method will take a string and create a list, breaking it on spaces.
   example: |
     import random
     word_list = "Sphinx of black quartz judge my vow".split()
@@ -260,9 +241,9 @@
 - title: "Give me a word... any word."
   content: |
     In frequency based text generation, you're given a list of words and the chance that they will follow the previous one.
-    For this example we will simplify and give you an array of words to choose from.
+    For this example we will simplify and give you a list of words to choose from.
     You will expect the structure to be:
-    $word_list = ["apple", "banana", "cracker"]
+    $word_list = ["apple", "banana", "cherry"]
     The expected output is:
     $word = "apple"
     or
@@ -276,7 +257,7 @@
       # insert your code below here...
       # select a random word from `word_list`.
 
-      # and above here!
+      # insert your code above here!
       return word
 
     generate_text_from_file('./drseuss.txt', word=get_next_word)
@@ -294,13 +275,13 @@
 
 - title: "Extending the list."
   content: |
-    lists can be made longer by using:
+    Lists can be made longer by using:
     $a = [1, 2, 3]
     .a.append(4)
     .print(a)
-    which will print
+    Which will print
     $ [1, 2, 3, 4]
-    !try and extend the next list with the value in b
+    !Try and extend the next list with the value in b
   example: |
     a = ["apple"]
     b = "banana"
@@ -314,12 +295,20 @@
     b = "banana"
     a.append(b)
     print(a)
+  hint:
+    title: |
+      list.append(word)
+    content: |
+      Append will take any list and add a word into it.
+      For example, if you take fruits = ["apple", "banana"] and run fruits.append("cherry").
+      The list will become ["apple", "banana", "cherry"]
 
 - title: "Lists to strings!"
   content: |
-    to make lists into single strings, we can use the string.join method.
+    To make lists into single strings, we can use the string.join method.
     $' '.join(my_list)
-    this will join all the elements in 'my_list' with the string, " " (which is just a space.)
+    This will join all the elements in 'my_list' with the string, " " (which is just a space.)
+    !See how words can be joined into a sentence and try your own!
   example: |
     list_a = ["this", "is", "a", "test"]
     print('👏'.join(list_a))
@@ -328,6 +317,28 @@
       'string'.join(my_list)
     content: |
       join each element of my list with whatever is contained in string.
+
+- title: "While Loops"
+  content: |
+    While loops are similar to For loops, but instead of doing something a set amount of times, they will continue while a give statement is true.
+    We can count from 0 to 9 by using:
+    $i = 0
+    .while i <= 10:
+    .    print(i)
+    .    i = i + 1
+    Notice that this doesn't include the last number!
+    !Always make sure that you change the value inside the while loop or you'll have an infinite loop!!!
+  example: |
+    i = 0
+    while i < 3:
+      print(i)
+      i = i + 1
+  hint:
+    title: |
+      while <condition>:
+      --do this
+    content: |
+      repeat while <condition> is true.
 
 - title: "Let's make some sentences."
   content: |
@@ -353,7 +364,7 @@
       # append a word to the sentence.
       # remember to use selection and iteration.
 
-      # and above here!
+      # insert your code above here!
       return sentence
 
     generate_text_from_file('./drseuss.txt', sentence=construct_sentence)
@@ -371,7 +382,7 @@
         word_list = word_freq[word]
         word = get_next_word(word_list)
         sentence.append(word)
-      # and above here!
+      # insert your code above here!
       return ' '.join(sentence)
 
     generate_text_from_file('./drseuss.txt', sentence=construct_sentence)
@@ -382,10 +393,10 @@
     To begin with, add all of the words to a dictionary!
     You can do this with:
     $dictionary['word'] = []
-    !Expected input
+    !If you're given the following input text:
     $['the', 'quick', 'brown']
-    !Expected output
-    ${'the': [], 'quick': []}
+    !You will be expected to return the output:
+    ${'the': [], 'quick': [], 'brown': []}
   example: |
     from src.main import Reader, generate_text_from_file
     import random
@@ -394,9 +405,9 @@
       # insert your code below here...
 
       # create a dictionary for words
-      # in the dictionary, add the word and use a list for the value.
+      # in the dictionary, add the word and use a list for the starting value.
 
-      # and above here!
+      # insert your code above here!
       return word_freqs
 
     # don't touch this code...
@@ -416,7 +427,7 @@
       word_freqs = {}
       for word in text:
         word_freqs[word] = []
-      # and above here!
+      # insert your code above here!
       return word_freqs
 
     # don't touch this code...
@@ -445,7 +456,7 @@
       # keep track of the last word
       # add the current word to a list of words that follow the last word
 
-      # and above here!
+      # insert your code above here!
       return word_freq
 
     # don't touch this code...
@@ -474,7 +485,7 @@
 
         # set the new last word.
         last_word = word
-      # and above here!
+      # insert your code above here!
       return word_freq
 
     # don't touch this code...
@@ -494,20 +505,20 @@
     def parse_text(text):
       # insert your code below here...
 
-      # and above here!
+      # insert your code above here!
       return word
 
     def construct_sentence(word_freq, get_next_word):
       first_word = random.choice([word for word in word_freq])
       # insert your code below here...
 
-      # and above here!
+      # insert your code above here!
       return sentence
 
     def get_next_word(word_list):
       # insert your code below here...
 
-      # and above here!
+      # insert your code above here!
       return word
 
     generate_text_from_file('./drseuss.txt', parse=parse_text, sentence=construct_sentence, word=get_next_word)
