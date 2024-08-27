@@ -75,6 +75,8 @@
     $dictionary = {"apples": 20, "bananas": 10}
     And you can get a value from it with:
     $print(dictionary["apples"])
+    To add items to the dictionary you can use:
+    $dictionary["<key>"] = <value> # just like with variables!
     You can also store lists and dictionaries within each other to create even more complex data, but we'll come back to that later.
     Add a new key to the dictionary to remove the error.
   example: |
@@ -161,27 +163,27 @@
     content: |
       repeat this n times, store how many times we've looped in 'i'.
 
-- title: "While Loops"
-  content: |
-    While loops are similar to For loops, but instead of doing something a set amount of times, they will continue while a give statement is true.
-    We can count from 0 to 9 by using:
-    $i = 0
-    .while i <= 10:
-    .    print(i)
-    .    i = i + 1
-    Notice that this doesn't include the last number!
-    !Always make sure that you change the value inside the while loop or you'll have an infinite loop!!!
-  example: |
-    i = 0
-    while i < 3:
-      print(i)
-      i = i + 1
-  hint:
-    title: |
-      while <condition>:
-      --do this
-    content: |
-      repeat while <condition> is true.
+# - title: "While Loops"
+#   content: |
+#     While loops are similar to For loops, but instead of doing something a set amount of times, they will continue while a give statement is true.
+#     We can count from 0 to 9 by using:
+#     $i = 0
+#     .while i <= 10:
+#     .    print(i)
+#     .    i = i + 1
+#     Notice that this doesn't include the last number!
+#     !Always make sure that you change the value inside the while loop or you'll have an infinite loop!!!
+#   example: |
+#     i = 0
+#     while i < 3:
+#       print(i)
+#       i = i + 1
+#   hint:
+#     title: |
+#       while <condition>:
+#       --do this
+#     content: |
+#       repeat while <condition> is true.
 
 - title: "Loopy Lists"
   content: |
@@ -237,29 +239,6 @@
     content: |
       return a random element from the provided list.
 
-- title: "Extending the list."
-  content: |
-    lists can be made longer by using:
-    $a = [1, 2, 3]
-    .a.append(4)
-    .print(a)
-    which will print
-    $ [1, 2, 3, 4]
-    !try and extend the next list with the value in b
-  example: |
-    a = ["apple"]
-    b = "banana"
-    #join the lists here.
-    print(a)
-  isTest: true
-  expect: |
-    ['apple', 'banana']
-  solution: |
-    a = ["apple"]
-    b = "banana"
-    a.append(b)
-    print(a)
-
 - title: "Give me a word... any word."
   content: |
     In frequency based text generation, you're given a list of words and the chance that they will follow the previous one.
@@ -294,6 +273,29 @@
       return word
 
     generate_text_from_file('./drseuss.txt', word=get_next_word)
+
+- title: "Extending the list."
+  content: |
+    lists can be made longer by using:
+    $a = [1, 2, 3]
+    .a.append(4)
+    .print(a)
+    which will print
+    $ [1, 2, 3, 4]
+    !try and extend the next list with the value in b
+  example: |
+    a = ["apple"]
+    b = "banana"
+    #join the lists here.
+    print(a)
+  isTest: true
+  expect: |
+    ['apple', 'banana']
+  solution: |
+    a = ["apple"]
+    b = "banana"
+    a.append(b)
+    print(a)
 
 - title: "Lists to strings!"
   content: |
@@ -372,6 +374,9 @@
 
     def parse_text(text):
       # insert your code below here...
+
+      # create a dictionary for words
+      # in the dictionary, add the word and use a list for the value.
 
       # and above here!
       return word_freqs
