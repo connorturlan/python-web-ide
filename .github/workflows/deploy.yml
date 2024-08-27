@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18]
+        node-version: [20]
 
     steps:
       - uses: actions/checkout@v3
@@ -23,6 +23,9 @@ jobs:
       - run: npm i
       - run: npm run build
       - run: git add -f dist/
+      - run: |
+          git config --global user.email "workflow@github.com"
+          git config --global user.name "workflow"
       - run: git commit -m "pages deploy"
       - run: git push origin main:gh-pages
 
