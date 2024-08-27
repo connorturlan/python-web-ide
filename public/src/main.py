@@ -121,3 +121,5 @@ def generate_text_from_file(filename,
     print(passage)
 
     print("===== done =====")
+
+generate_text_from_file("thelorax.txt")

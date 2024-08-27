@@ -98,6 +98,8 @@
     !Try changing the program to print out "success!"
   example: |
     b = 1
+
+    # leave this code unchanged.
     if b == 2:
         print("success")
     else:
@@ -120,6 +122,27 @@
     content: |
       if the condition is true do this, otherwise do that.
       remember that every line after a colon ':' needs to be indented.
+
+- title: Go Fish
+  content: |
+    Dictionaries let you find out if they contain a word or `key` by using:
+    $cards = {"one": 01, "two": 10}
+    .if "three" in cards:
+    .  print("go fish")
+    The `in` keyword return true or false whether a key exists within a dictionary.
+    This is really useful to check if we have a value in a dictionary to prevent errors!
+    !Fix the code below to check whether the key exists in the dictionary before adding.
+  example: |
+    store = {"apples": 20, "bananas": 10}
+
+    print("i'm craving a crepe, i'll add 10 to my cart!")
+
+    # add a statement here to make sure there are crepes in the store.
+    print("oh... they only have", store["crepes"], "crepes")
+  hint:
+    title: my_dict[string]
+    content: |
+      returns the element in a dictionary named string
 
 - title: "For Loops"
   content: |
@@ -145,14 +168,14 @@
     $i = 0
     .while i <= 10:
     .    print(i)
-    .    i += 1
+    .    i = i + 1
     Notice that this doesn't include the last number!
     !Always make sure that you change the value inside the while loop or you'll have an infinite loop!!!
   example: |
     i = 0
     while i < 3:
       print(i)
-      i += 1
+      i = i + 1
   hint:
     title: |
       while <condition>:
@@ -243,12 +266,18 @@
     For this example we will simplify and give you an array of words to choose from.
     You will expect the structure to be:
     $word_list = ["apple", "banana", "cracker"]
+    The expected output is:
+    $word = "apple"
+    or
+    $word = "banana"
+    !The idea is that you are returning a random word for the given word list!
   example: |
     from src.main import generate_text_from_file
     import random
 
     def get_next_word(word_list):
       # insert your code below here...
+      # select a random word from `word_list`.
 
       # and above here!
       return word
@@ -283,18 +312,26 @@
 - title: "Let's make some sentences."
   content: |
     $word_map
-    contains all of the trailing words that follow a given word, and looks like:
-    ${"the": ["quick", "lazy"], "quick": ["brown"], ...}4
-    !using the get next word function provided, generate a sentence that ends when the next word is '.'.
+    Contains all of the trailing words that follow a given word, and looks like:
+    ${"the": ["quick", "lazy"], "quick": ["brown"], ...}
+    !Using the get next word function provided, generate a sentence that ends when the next word is '.'.
      ...yes we are going to count a full stop as a word!
-    don't forget to join the list into a string before you return!
+    Don't forget to join the list into a string before you return!
+    Expect to output:
+    $"the quick brown fox."
   example: |
     from src.main import generate_text_from_file
     import random
 
     def construct_sentence(word_freq, get_next_word):
+      # use this line to select a new word.
       word = random.choice([word for word in word_freq])
+
       # insert your code below here...
+
+      # while word is not equal to a full stop...
+      # append a word to the sentence.
+      # remember to use selection and iteration.
 
       # and above here!
       return sentence
@@ -325,6 +362,10 @@
     To begin with, add all of the words to a dictionary!
     You can do this with:
     $dictionary['word'] = []
+    !Expected input
+    $['the', 'quick', 'brown']
+    !Expected output
+    ${'the': [], 'quick': []}
   example: |
     from src.main import Reader, generate_text_from_file
     import random
@@ -333,7 +374,7 @@
       # insert your code below here...
 
       # and above here!
-      return word
+      return word_freqs
 
     # don't touch this code...
     text = Reader()
@@ -349,11 +390,11 @@
 
     def parse_text(text):
       # insert your code below here...
-      word_freq = {}
+      word_freqs = {}
       for word in text:
-        word_freq[word] = []
+        word_freqs[word] = []
       # and above here!
-      return word_freq
+      return word_freqs
 
     # don't touch this code...
     text = Reader()
@@ -376,6 +417,10 @@
       word_freq = {}
       last_word = text[0]
       # insert your code below here...
+
+      # keep reading the text while there are words to read
+      # keep track of the last word
+      # add the current word to a list of words that follow the last word
 
       # and above here!
       return word_freq

@@ -22,7 +22,7 @@ import {
 import HintPanel from "./components/HintPanel/HintPanel";
 
 var tutorials = [];
-const DEBUG = false;
+const DEBUG = true;
 
 const loadTutorial = async () => {
   const rawFile = await readFile("./lessons.yaml");
@@ -124,7 +124,7 @@ function App() {
     // allow the solution after 2 minutes.
     setTimeout(() => {
       allowSolution(true);
-    }, 120_000);
+    }, 600_000);
   }, [pageIndex]);
 
   // allow tests to block turning the page.
